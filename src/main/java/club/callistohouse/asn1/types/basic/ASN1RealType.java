@@ -101,7 +101,7 @@ public class ASN1RealType extends ASN1BasicType {
 		}
 		derStream.write(exponentBytes);
 
-		byte[] leftBytes = Long.toUnsignedString(mantissa, 2).getBytes();
+		byte[] leftBytes = Long.toUnsignedString(mantissa, 16).getBytes();
 		int length = leftBytes.length;
 		byte[] mantissaBytes = new byte[length];
 		for(int i = 0; i < length; i++) {
