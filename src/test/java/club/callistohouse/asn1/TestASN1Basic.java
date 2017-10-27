@@ -2,6 +2,7 @@ package club.callistohouse.asn1;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.time.OffsetDateTime;

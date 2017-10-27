@@ -76,40 +76,31 @@ public class ASN1RealType extends ASN1BasicType {
 		if(doubleObj == 0) {return; }
 		if(doubleObj == Double.POSITIVE_INFINITY) { derStream.write(0x40); return; }
 		if(doubleObj == Double.NEGATIVE_INFINITY) { derStream.write(0x41); return; }
-		long bits = Double.doubleToLongBits(doubleObj);
-		long mantissa = (bits & 0x000fffffffffffffL);
-		int exponent = Integer.valueOf(Long.valueOf(((bits & 0x7FF0000000000000L) >> 52) - 1023).toString());
-		int base = 2;
-		byte signByte = (byte) (((bits & 0x8000000000000000L) > 1) ? 0x40 : 0x00);
-		ASN1OutputStream exponentStream = derStream.newStream();
-		new ASN1IntegerType().encodeValue(exponent, exponentStream);
-		byte[] exponentBytes = exponentStream.toByteArray();
-		switch(exponentBytes.length) {
-			case 1: 
-				derStream.write(0x80 | (byte) signByte | 0x00);
-				break;
-			case 2:
-				derStream.write(0x80 | (byte) signByte | 0x01);
-				break;
-			case 3:
-				derStream.write(0x80 | (byte) signByte | 0x02);
-				break;
-			default:
-				derStream.write(0x80 | (byte) signByte | 0x03);
-				derStream.write(exponentBytes.length);
-				break;
-		}
-		derStream.write(exponentBytes);
 
-		byte[] leftBytes = Long.toUnsignedString(mantissa, 16).getBytes();
-		int length = leftBytes.length;
-		byte[] mantissaBytes = new byte[length];
-		for(int i = 0; i < length; i++) {
-			mantissaBytes[i] = leftBytes[length - i - 1];
+
+		long bits = Double.doubleToRawLongBits(doubleObj);
+		int signByte = (int) (bits >> (63 - 6)) & (1 << 6) | (1 << 7);
+		// shift to the correct place to start with, and pre-add bit 8
+		int exponent = ((int) (bits >> 52) & 0x7FF) - (1023 + 52);
+		// don't need to box/unbox to do arithmetic
+		long mantissa = (bits & 0xFFFFFFFFFFFFFL) | (1L << 52);
+		// add the hidden bit
+		while ((mantissa & 1) == 0) {
+			mantissa >>= 1;
+			exponent++;
 		}
-		for(byte b : mantissaBytes) {
-			derStream.write(b);
+
+		// normalize
+		byte[] exptbytes = BigInteger.valueOf(exponent).toByteArray();
+		if (exptbytes.length <= 3)
+			derStream.write(signByte | (exptbytes.length - 1));
+		else {
+			derStream.write(signByte | 3);
+			derStream.write(exptbytes.length);
 		}
+		// only the if branch is actually needed
+		derStream.write(exptbytes);
+		derStream.write(BigInteger.valueOf(mantissa/* >>scale */).toByteArray());
 	}
 
 	private Double decodeBinaryEncodedValue(ASN1InputStream derStream, int length, byte specialByte) throws IOException {
