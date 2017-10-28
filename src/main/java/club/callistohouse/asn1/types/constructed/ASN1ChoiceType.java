@@ -30,9 +30,7 @@ public class ASN1ChoiceType extends ASN1StructuredType<ASN1ChoiceElement> {
 	}
 
 	public void encode(Object obj, ASN1OutputStream derStream) throws IOException {
-		ASN1OutputStream tempStream = derStream.newStream();
-		encodeValue(obj, tempStream);
-		derStream.write(tempStream.stream.toByteArray(), 0, tempStream.stream.size());
+		encodeValue(obj, derStream);
 	}
 	public void encodeValue(Object obj, ASN1OutputStream derStream) throws IOException {
 		for(ASN1ChoiceElement element : elements) {
