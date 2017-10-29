@@ -24,11 +24,11 @@ public class ASN1OutputStream extends OutputStream {
 	public void nextPutTag(int tag) throws IOException { write(tag); }
 	public void nextPutLength(Integer size) throws IOException {
 		if(size <= 127) {
-			write(size);
+			write(size); return; 
 		} else {
-			byte[] sizeArray = IntUtil.longToByteArray(size);
+			byte[] sizeArray = IntUtil.intToByteArray(size);
 			int sizeIndex = -1;
-			for(int i = sizeArray.length - 1; i >= 0; i--) {
+			for(int i = 0; i < sizeArray.length; i++) {
 				if(sizeArray[i] != 0) {
 					sizeIndex = i;
 					break;
@@ -38,7 +38,7 @@ public class ASN1OutputStream extends OutputStream {
 			int byteCount = sizeArray.length - sizeIndex;
 			write(byteCount | 0x80);
 
-			for(int i = sizeArray.length - 1; i >= sizeIndex; i--) {
+			for(int i = sizeIndex; i < sizeArray.length; i++) {
 				write(sizeArray[i]);
 			}
 		}
