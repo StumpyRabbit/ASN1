@@ -21,7 +21,7 @@ public class TestASN1Defined {
 		ASN1Module.name("test").explicitTypeTag("TestExplicit", new ASN1IntegerType(), 0);
 
 		ASN1Type type = (ASN1Type) ASN1Module.name("test").find("TestExplicit");
-		byte[] bytes = new byte[] {(byte)160, 4, 2, 2, 3, 21};
+		byte[] bytes = new byte[] {(byte)160, 2, 3, 21};
 		Integer explicit = (Integer)ASN1InputStream.decode(bytes, type);
 		assertTrue(explicit == 789);
 		byte[] newBytes = ASN1OutputStream.encodeObject(explicit, type);

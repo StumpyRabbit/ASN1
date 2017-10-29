@@ -13,7 +13,7 @@ public class ASN1ExplicitSubType extends ASN1SubType {
 	public void encode(Object obj, ASN1OutputStream derStream) throws IOException {
 		derStream.nextPutTag(asn1Tag() | 160);
 		ASN1OutputStream tempStream = derStream.newStream();
-		getParent().encode(obj, tempStream);
+		getParent().encodeValue(obj, tempStream);
 		derStream.nextPutLength(tempStream.stream.size());
 		derStream.write(tempStream.stream.toByteArray());
 	}
@@ -25,8 +25,7 @@ public class ASN1ExplicitSubType extends ASN1SubType {
 	}
 	public Object decode(ASN1InputStream derStream) throws IOException, InstantiationException, IllegalAccessException {
 		derStream.nextTag();
-		derStream.nextLength();
-		return getParent().decode(derStream);
+		return getParent().decodeValue(derStream, derStream.nextLength());
 	}
 	@Override
 	public Object decodeValue(ASN1InputStream derStream, int length) {
