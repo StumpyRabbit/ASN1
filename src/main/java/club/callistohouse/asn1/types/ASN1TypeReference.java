@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
+import club.callistohouse.ston.STONWriter;
 
 public class ASN1TypeReference extends ASN1Type {
 
@@ -39,5 +40,9 @@ public class ASN1TypeReference extends ASN1Type {
 			throws IOException, InstantiationException, IllegalAccessException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
+		stonWriter.writeObjectListSingleton(obj, obj.toString());
 	}
 }

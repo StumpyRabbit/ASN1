@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
+import club.callistohouse.asn1.objects.ASN1ExplicitContextValue;
+import club.callistohouse.ston.STONWriter;
 
 public abstract class ASN1WrapperType extends ASN1Type {
 
@@ -21,4 +23,7 @@ public abstract class ASN1WrapperType extends ASN1Type {
 		return null;
 	}
 
+	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
+		stonWriter.writeObjectListSingleton(obj, ((ASN1ExplicitContextValue)obj).tagValue.toString());
+	}
 }

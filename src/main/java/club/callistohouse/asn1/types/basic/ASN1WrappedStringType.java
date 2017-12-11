@@ -5,6 +5,7 @@ import java.io.IOException;
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.asn1.objects.ASN1AbstractString;
+import club.callistohouse.ston.STONWriter;
 
 public abstract class ASN1WrappedStringType<S extends ASN1AbstractString<S>> extends ASN1OctetsType {
 
@@ -83,5 +84,9 @@ public abstract class ASN1WrappedStringType<S extends ASN1AbstractString<S>> ext
 			}
 		} while(loopTest);
 		return octets;
+	}
+	@Override
+	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
+		stonWriter.writeString(((ASN1AbstractString<?>) obj).string);
 	}
 }

@@ -6,6 +6,7 @@ import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1Module;
 import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.asn1.objects.ASN1ObjectId;
+import club.callistohouse.ston.STONWriter;
 
 public class ASN1ObjectIdentifierType extends ASN1BasicType {
 
@@ -49,6 +50,11 @@ public class ASN1ObjectIdentifierType extends ASN1BasicType {
 		ASN1ObjectId myOid = new ASN1ObjectId();
 		myOid.oid = oid;
 		return myOid;
+	}
+
+	@Override
+	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
+		stonWriter.writeObjectListSingleton(obj, ((ASN1ObjectId)obj).asAsn1DerBytes().toString());
 	}
 
 }

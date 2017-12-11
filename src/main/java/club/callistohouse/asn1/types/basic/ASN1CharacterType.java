@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -16,9 +17,9 @@ import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.ston.STONWriter;
 
-public class ASN1UTF8StringType extends ASN1OctetsType {
+public class ASN1CharacterType extends ASN1OctetsType {
 
-	public ASN1UTF8StringType() { super("ASN1UTF8StringType"); }
+	public ASN1CharacterType() { super("ASN1UTF8StringType"); }
 
 	public boolean isTypeFor(Object obj) {
 		return obj instanceof String;
@@ -93,7 +94,7 @@ public class ASN1UTF8StringType extends ASN1OctetsType {
 		try {
 			Writer writer = new OutputStreamWriter(derStream, "UTF-8");
 			BufferedWriter fout = new BufferedWriter(writer);
-			fout.write(((String)obj).toCharArray());
+			fout.write(String.valueOf((char)obj));
 			fout.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -101,7 +102,7 @@ public class ASN1UTF8StringType extends ASN1OctetsType {
 	}
 
 	@Override
-	public Object decodeValue(ASN1InputStream derStream, int length) throws IOException {
+	public char[] decodeValue(ASN1InputStream derStream, int length) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream(length);
 		byte[] bytes = new byte[length];
 		derStream.read(bytes);
@@ -120,7 +121,7 @@ public class ASN1UTF8StringType extends ASN1OctetsType {
 				}};
 			s.forEach(cons);
             fin.close();
-			return new String(out.toByteArray());
+			return Arrays.toString(out.toByteArray()).toCharArray();
 		} catch (IOException e) {
 			throw new IOException(e.getMessage());
 		}
@@ -128,6 +129,6 @@ public class ASN1UTF8StringType extends ASN1OctetsType {
 
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeString((String) obj);
+		stonWriter.writeObjectListSingleton(obj, ((Character)obj).toString());
 	}
 }

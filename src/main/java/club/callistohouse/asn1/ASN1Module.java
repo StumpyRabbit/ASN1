@@ -40,6 +40,7 @@ import club.callistohouse.asn1.types.basic.ASN1BigIntegerType;
 import club.callistohouse.asn1.types.basic.ASN1BitStringType;
 import club.callistohouse.asn1.types.basic.ASN1BooleanType;
 import club.callistohouse.asn1.types.basic.ASN1ByteArrayType;
+import club.callistohouse.asn1.types.basic.ASN1CharacterType;
 import club.callistohouse.asn1.types.basic.ASN1GeneralStringType;
 import club.callistohouse.asn1.types.basic.ASN1GeneralizedTimeType;
 import club.callistohouse.asn1.types.basic.ASN1GraphicStringType;
@@ -111,6 +112,8 @@ public class ASN1Module {
 	static {
 		classToTypeTable.put(boolean.class, new ASN1BooleanType());
 		classToTypeTable.put(Boolean.class, new ASN1BooleanType());
+		classToTypeTable.put(char.class, new ASN1CharacterType());
+		classToTypeTable.put(Character.class, new ASN1CharacterType());
 		classToTypeTable.put(int.class, new ASN1IntegerType());
 		classToTypeTable.put(Integer.class, new ASN1IntegerType());
 		classToTypeTable.put(BigInteger.class, new ASN1BigIntegerType());

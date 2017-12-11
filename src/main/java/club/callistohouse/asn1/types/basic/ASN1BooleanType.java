@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
+import club.callistohouse.ston.STONWriter;
 
 public class ASN1BooleanType extends ASN1BasicType {
 
@@ -31,4 +32,8 @@ public class ASN1BooleanType extends ASN1BasicType {
 		return decodeValue(derStream, length);
 	}
 
+	@Override
+	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
+		stonWriter.writeBoolean((Boolean) obj);
+	}
 }

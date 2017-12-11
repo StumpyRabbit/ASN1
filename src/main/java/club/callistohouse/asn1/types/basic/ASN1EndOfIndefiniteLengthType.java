@@ -5,6 +5,7 @@ import java.io.IOException;
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.asn1.types.ASN1EndOfIndefiniteLengthMarker;
+import club.callistohouse.ston.STONWriter;
 
 public class ASN1EndOfIndefiniteLengthType extends ASN1BasicType {
 
@@ -40,5 +41,9 @@ public class ASN1EndOfIndefiniteLengthType extends ASN1BasicType {
 			throws IOException, InstantiationException, IllegalAccessException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
 	}
 }
