@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import club.callistohouse.asn1.ASN1Module;
 import club.callistohouse.asn1.types.ASN1Type;
@@ -64,6 +65,26 @@ public class STONWriter {
 		type.stonOn(obj, this);
 	}
 
+	private String className(Object obj) {
+		Class<?> clazz = obj.getClass();
+		if(clazz.equals(byte[].class)) {
+			return "ByteArray";
+		}
+		if(clazz.equals(Object[].class)) {
+			return "Array";
+		}
+		if(clazz.equals(ArrayList.class)) {
+			return "OrderedCollection";
+		}
+		if(clazz.equals(Vector.class)) {
+			return "OrderedCollection";
+		}
+		if(clazz.equals(HashMap.class)) {
+			return "Dictionary";
+		}
+		return obj.getClass().getSimpleName();
+	}
+
 	public boolean isSimpleSymbol(char c) {
 		return STONSimpleSymbolCharacters.get((byte)c) == 0;
 	}
@@ -88,6 +109,24 @@ public class STONWriter {
 			outStream.write("false".getBytes());
 		}
 		
+	}
+
+	public void writeBigInteger(BigInteger obj) throws IOException {
+		outStream.write(obj.toByteArray());
+	}
+	public void writeFloat(Float obj) throws IOException {
+		outStream.write(obj.toString().getBytes());
+	}
+	public void writeString(String obj) throws IOException {
+		outStream.write("'".getBytes());
+		char[] chars = obj.toCharArray();
+		for(int i = 0; i < chars.length; i++) {
+			encodeCharacter(chars[i]);;
+		}
+		outStream.write("'".getBytes());
+	}
+	public void writeNull() throws IOException {
+		outStream.write("nil".getBytes());
 	}
 
 	public void writeObjectSingleton(Object obj, String hex) throws IOException {
@@ -167,29 +206,5 @@ public class STONWriter {
 			}
 			outStream.write("]".getBytes());
 		}
-	}
-	private String className(Object obj) {
-		Class<?> clazz = obj.getClass();
-		if(clazz.equals(byte[].class)) {
-			return "ByteArray";
-		}
-		return obj.getClass().getSimpleName();
-	}
-	public void writeBigInteger(BigInteger obj) throws IOException {
-		outStream.write(obj.toByteArray());
-	}
-	public void writeFloat(Float obj) throws IOException {
-		outStream.write(obj.toString().getBytes());
-	}
-	public void writeString(String obj) throws IOException {
-		outStream.write("'".getBytes());
-		char[] chars = obj.toCharArray();
-		for(int i = 0; i < chars.length; i++) {
-			encodeCharacter(chars[i]);;
-		}
-		outStream.write("'".getBytes());
-	}
-	public void writeNull() throws IOException {
-		outStream.write("nil".getBytes());
 	}
 }
