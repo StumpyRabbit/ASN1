@@ -97,7 +97,7 @@ public class ASN1BitStringType extends ASN1OctetsType {
 
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectListSingleton(obj, ((ASN1BitString)obj).getString());
+		stonWriter.writeObjectSingleton(obj, ((ASN1BitString)obj).getString());
 	}
 
 }

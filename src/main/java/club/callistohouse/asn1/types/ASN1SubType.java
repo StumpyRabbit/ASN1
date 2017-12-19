@@ -28,6 +28,6 @@ public abstract class ASN1SubType extends ASN1Type {
 	}
 
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectListSingleton(obj, obj.toString());
+		stonWriter.writeObjectSingleton(obj, obj.toString());
 	}
 }

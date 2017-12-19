@@ -129,6 +129,6 @@ public class ASN1CharacterType extends ASN1OctetsType {
 
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectListSingleton(obj, ((Character)obj).toString());
+		stonWriter.writeObjectSingleton(obj, ((Character)obj).toString());
 	}
 }

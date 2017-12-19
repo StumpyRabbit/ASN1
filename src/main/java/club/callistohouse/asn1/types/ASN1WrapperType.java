@@ -24,6 +24,6 @@ public abstract class ASN1WrapperType extends ASN1Type {
 	}
 
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectListSingleton(obj, ((ASN1ExplicitContextValue)obj).tagValue.toString());
+		stonWriter.writeObjectSingleton(obj, ((ASN1ExplicitContextValue)obj).tagValue.toString());
 	}
 }

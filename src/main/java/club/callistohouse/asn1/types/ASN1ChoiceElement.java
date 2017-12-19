@@ -5,6 +5,7 @@ import java.io.IOException;
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.asn1.types.constructed.ASN1StructuredType;
+import club.callistohouse.ston.STONWriter;
 
 public class ASN1ChoiceElement {
 	public ASN1Type owner, type;
@@ -35,5 +36,8 @@ public class ASN1ChoiceElement {
 			return type.decode(derStream);
 		}
 		throw new IOException("bad tag");
+	}
+	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
+		type.stonOn(obj, stonWriter);
 	}
 }

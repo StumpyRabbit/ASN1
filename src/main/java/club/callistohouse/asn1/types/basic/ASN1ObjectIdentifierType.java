@@ -54,7 +54,7 @@ public class ASN1ObjectIdentifierType extends ASN1BasicType {
 
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectListSingleton(obj, ((ASN1ObjectId)obj).asAsn1DerBytes().toString());
+		stonWriter.writeObjectSingleton(obj, ((ASN1ObjectId)obj).asAsn1DerBytes().toString());
 	}
 
 }

@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
+import club.callistohouse.ston.STONWriter;
 
 public class ASN1StructureElement extends ASN1ChoiceElement {
 	public boolean optional = true;
@@ -19,6 +20,16 @@ public class ASN1StructureElement extends ASN1ChoiceElement {
 		return type.isTypeFor(val);
 	}
 
+	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
+		Object val = valueFrom(obj);
+		if((val == null) & isOptional()) {
+			return;
+		}
+		if(hasDefault() & (defaultValue == val)) {
+			return;			
+		}
+		type.stonOn(obj, stonWriter);
+	}
 	public void encode(Object obj, ASN1OutputStream derStream) throws IOException {
 		Object val = valueFrom(obj);
 		if((val == null) & isOptional()) {

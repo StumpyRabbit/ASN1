@@ -1,7 +1,11 @@
 package club.callistohouse.asn1.types.constructed;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
+import club.callistohouse.ston.STONWriter;
 
 public class ASN1SequenceOfType extends ASN1UnstructuredType {
 
@@ -17,4 +21,8 @@ public class ASN1SequenceOfType extends ASN1UnstructuredType {
 		return new ArrayList();
 	}
 
+	@Override
+	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
+		stonWriter.writeObjectList(obj, (List)obj);
+	}
 }

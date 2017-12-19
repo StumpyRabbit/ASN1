@@ -7,7 +7,6 @@ import java.nio.ByteBuffer;
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.ston.STONWriter;
-import club.callistohouse.utils.IntUtil;
 
 public class ASN1BigIntegerType extends ASN1BasicType {
 

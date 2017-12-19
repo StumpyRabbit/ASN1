@@ -33,6 +33,6 @@ public class ASN1WrapperPrimitiveType extends ASN1WrapperType {
 	}
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectListSingleton(obj, ((ASN1ExplicitContextValue)obj).tagValue.toString());
+		stonWriter.writeObjectSingleton(obj, ((ASN1ExplicitContextValue)obj).tagValue.toString());
 	}
 }

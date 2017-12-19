@@ -57,7 +57,7 @@ public class ASN1GeneralizedTimeType extends ASN1BasicType {
 	}
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectListSingleton(obj, ((Date)obj).toString());
+		stonWriter.writeObjectSingleton(obj, ((Date)obj).toString());
 	}
 
 }

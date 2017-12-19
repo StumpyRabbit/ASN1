@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import club.callistohouse.asn1.ASN1Module;
 import club.callistohouse.asn1.types.ASN1Type;
@@ -79,10 +80,7 @@ public class STONWriter {
 			outStream.write(c);
 		}
 	}
-	public String nextPutObject(Object obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	public void writeBoolean(Boolean bool) throws IOException {
 		if(bool) {
 			outStream.write("true".getBytes());
@@ -92,14 +90,81 @@ public class STONWriter {
 		
 	}
 
-	public void writeObjectListSingleton(Object obj, String hex) throws IOException {
+	public void writeObjectSingleton(Object obj, String hex) throws IOException {
 		Integer index = null;
 		if((index = objects.get(obj)) != null) {
 			outStream.write(("@" + index).getBytes());
 		} else {
+			index = objects.size() + 1;
+			objects.put(obj, index);
 			outStream.write((className(obj)).getBytes());
 			outStream.write("[".getBytes());
 			outStream.write(hex.getBytes());
+			outStream.write("]".getBytes());
+		}
+	}
+	public void writeObjectList(Object obj, List<?> list) throws IOException {
+		Integer index = null;
+		if((index = objects.get(obj)) != null) {
+			outStream.write(("@" + index).getBytes());
+		} else {
+			index = objects.size() + 1;
+			objects.put(obj, index);
+			outStream.write((className(obj)).getBytes());
+			outStream.write("[".getBytes());
+			boolean first = true;
+			for(int i = 0; i < list.size(); i++) {
+				if(first) {
+					first = false;
+				} else {
+					outStream.write(",".getBytes());
+				}
+				nextPut(list.get(i));
+			}
+			outStream.write("]".getBytes());
+		}
+	}
+	public void writeObjectSet(Object obj, Set<?> set) throws IOException {
+		Integer index = null;
+		if((index = objects.get(obj)) != null) {
+			outStream.write(("@" + index).getBytes());
+		} else {
+			index = objects.size() + 1;
+			objects.put(obj, index);
+			outStream.write((className(obj)).getBytes());
+			outStream.write("[".getBytes());
+			boolean first = true;
+			for(Object each : set) {
+				if(first) {
+					first = false;
+				} else {
+					outStream.write(",".getBytes());
+				}
+				nextPut(each);
+			}
+			outStream.write("]".getBytes());
+		}
+	}
+	public void writeObjectMap(Object obj, Map<String,?> map) throws IOException {
+		Integer index = null;
+		if((index = objects.get(obj)) != null) {
+			outStream.write(("@" + index).getBytes());
+		} else {
+			index = objects.size() + 1;
+			objects.put(obj, index);
+			outStream.write((className(obj)).getBytes());
+			outStream.write("[".getBytes());
+			boolean first = true;
+			for(String key : map.keySet()) {
+				if(first) {
+					first = false;
+				} else {
+					outStream.write(",".getBytes());
+				}
+				outStream.write(key.getBytes());
+				outStream.write(" : ".getBytes());
+				nextPut(map.get(key));
+			}
 			outStream.write("]".getBytes());
 		}
 	}

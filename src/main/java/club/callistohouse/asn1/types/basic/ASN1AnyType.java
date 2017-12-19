@@ -42,6 +42,6 @@ public class ASN1AnyType extends ASN1BasicType {
 
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectListSingleton(obj, obj.toString());
+		stonWriter.writeObjectSingleton(obj, obj.toString());
 	}
 }

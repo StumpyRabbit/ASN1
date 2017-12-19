@@ -79,7 +79,7 @@ public class ASN1ByteArrayType extends ASN1OctetsType {
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
 		String hex = STONWriter.bytesToHex((byte[])obj);
-		stonWriter.writeObjectListSingleton(obj, hex);
+		stonWriter.writeObjectSingleton(obj, hex);
 		}
 
 }

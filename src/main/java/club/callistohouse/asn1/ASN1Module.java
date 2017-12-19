@@ -130,6 +130,7 @@ public class ASN1Module {
 		classToTypeTable.put(List.class, new ASN1SequenceType());
 		classToTypeTable.put(Set.class, new ASN1SetType());
 		classToTypeTable.put(Date.class, new ASN1UTCTimeType());
+		classToTypeTable.put(Map.class, new ASN1AnyType());
 
 		classToTypeTable.put(ASN1NumericString.class, new ASN1NumericStringType());
 		classToTypeTable.put(ASN1PrintableString.class, new ASN1PrintableStringType());
@@ -170,7 +171,7 @@ public class ASN1Module {
 		} else if(obj instanceof ASN1Value) {
 			return new ASN1AnyType();
 		}
-		throw new RuntimeException("unknown asn1 obj class");
+		return new ASN1AnyType();
 	}
 	public static int tagForObject(Object obj) {
 		return typeForObject(obj).asn1Tag();
