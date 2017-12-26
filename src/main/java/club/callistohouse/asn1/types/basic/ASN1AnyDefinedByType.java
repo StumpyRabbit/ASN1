@@ -46,7 +46,7 @@ public class ASN1AnyDefinedByType extends ASN1BasicType {
 
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectSingleton(obj, obj.toString());
+		stonWriter.writeObjectMapped(obj);
 	}
 
 }

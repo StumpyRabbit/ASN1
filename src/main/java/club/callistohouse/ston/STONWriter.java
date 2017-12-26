@@ -2,8 +2,10 @@ package club.callistohouse.ston;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +51,18 @@ public class STONWriter {
 	        hexChars[j * 2 + 1] = hexArray[v & 0x0F];
 	    }
 	    return new String(hexChars);
+	}
+	public static List<Field> getAllFields(Class<?> type) {
+		return getAllFields(new ArrayList<Field>(), type);
+	}
+	public static List<Field> getAllFields(List<Field> fields, Class<?> type) {
+	    fields.addAll(Arrays.asList(type.getDeclaredFields()));
+
+	    if (type.getSuperclass() != null) {
+	        getAllFields(fields, type.getSuperclass());
+	    }
+
+	    return fields;
 	}
 	
 	private OutputStream outStream;
@@ -139,6 +153,34 @@ public class STONWriter {
 			outStream.write((className(obj)).getBytes());
 			outStream.write("[".getBytes());
 			outStream.write(hex.getBytes());
+			outStream.write("]".getBytes());
+		}
+	}
+	public void writeObjectMapped(Object obj) throws IOException {
+		Integer index = null;
+		if((index = objects.get(obj)) != null) {
+			outStream.write(("@" + index).getBytes());
+		} else {
+			index = objects.size() + 1;
+			objects.put(obj, index);
+			outStream.write((className(obj)).getBytes());
+			outStream.write("[".getBytes());
+			boolean first = true;
+			for(Field field : getAllFields(obj.getClass())) {
+				if(first) {
+					first = false;
+				} else {
+					outStream.write(",".getBytes());
+				}
+				field.setAccessible(true);
+				Object val;
+				try {
+					val = field.get(obj);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					throw new IOException(e);
+				}
+				nextPut(val);
+			}
 			outStream.write("]".getBytes());
 		}
 	}

@@ -5,7 +5,6 @@ import java.io.IOException;
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1Module;
 import club.callistohouse.asn1.ASN1OutputStream;
-import club.callistohouse.asn1.types.ASN1ChoiceElement;
 import club.callistohouse.asn1.types.ASN1EndOfIndefiniteLengthMarker;
 import club.callistohouse.asn1.types.ASN1StructureElement;
 import club.callistohouse.asn1.types.basic.ASN1EndOfIndefiniteLengthType;
