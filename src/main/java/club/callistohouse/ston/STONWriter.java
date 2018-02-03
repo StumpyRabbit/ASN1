@@ -17,9 +17,10 @@ import club.callistohouse.asn1.ASN1Module;
 import club.callistohouse.asn1.types.ASN1Type;
 
 public class STONWriter {
-	private static List<String> STONCharacters = new ArrayList<String>(128);
-	private static List<Integer> STONSimpleSymbolCharacters = Collections.nCopies(256, 1);
+	private static List<String> STONCharacters = new ArrayList<String>(Collections.nCopies(128, ""));
+	private static List<Integer> STONSimpleSymbolCharacters = new ArrayList<Integer>(Collections.nCopies(256, 1));
 	static {
+		STONCharacters.set(9, "\\b");
 		for(int i = 33; i <= 127; i++) {
 			STONCharacters.set(i, "pass");
 		}

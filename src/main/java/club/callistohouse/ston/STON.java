@@ -17,10 +17,10 @@ public class STON {
 	@SuppressWarnings("rawtypes")
 	public static Class<HashMap> mapClass() { return HashMap.class; } 
 
-	public static Object fromStream(InputStream instream) {
+	public static Object fromStream(InputStream instream) throws IOException {
 		return reader(instream).nextObject();
 	}
-	public static Object fromString(String in) {
+	public static Object fromString(String in) throws IOException {
 		return fromStream(new ByteArrayInputStream(in.getBytes()));
 	}
 	public static String toString(Object obj) throws IOException {
