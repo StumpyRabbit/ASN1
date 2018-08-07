@@ -59,6 +59,7 @@ import club.callistohouse.asn1.types.basic.ASN1UTF8StringType;
 import club.callistohouse.asn1.types.basic.ASN1UniversalStringType;
 import club.callistohouse.asn1.types.basic.ASN1VideotexStringType;
 import club.callistohouse.asn1.types.basic.ASN1VisibleStringType;
+import club.callistohouse.asn1.types.basic.STONDictionaryType;
 import club.callistohouse.asn1.types.constructed.ASN1ChoiceType;
 import club.callistohouse.asn1.types.constructed.ASN1MappedSequenceType;
 import club.callistohouse.asn1.types.constructed.ASN1MappedSetType;
@@ -130,7 +131,7 @@ public class ASN1Module {
 		classToTypeTable.put(List.class, new ASN1SequenceType());
 		classToTypeTable.put(Set.class, new ASN1SetType());
 		classToTypeTable.put(Date.class, new ASN1UTCTimeType());
-		classToTypeTable.put(Map.class, new ASN1AnyType());
+		classToTypeTable.put(Map.class, new STONDictionaryType());
 
 		classToTypeTable.put(ASN1NumericString.class, new ASN1NumericStringType());
 		classToTypeTable.put(ASN1PrintableString.class, new ASN1PrintableStringType());

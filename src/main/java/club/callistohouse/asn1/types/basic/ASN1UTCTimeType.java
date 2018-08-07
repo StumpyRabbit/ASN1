@@ -61,7 +61,7 @@ public class ASN1UTCTimeType extends ASN1BasicType {
 
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectSingleton(obj, ("\"" + ((Date)obj).toString() + "\""));
+		stonWriter.writeObjectSingleton(obj, ("''" + ((Date)obj).toString() + "''"));
 	}
 
 }
