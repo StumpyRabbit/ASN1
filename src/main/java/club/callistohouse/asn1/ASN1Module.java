@@ -108,6 +108,7 @@ public class ASN1Module {
 		tagToTypeTable.put(27,new ASN1GeneralStringType());
 		tagToTypeTable.put(28,new ASN1UniversalStringType());
 		tagToTypeTable.put(30,new ASN1BMPStringType());
+		tagToTypeTable.put(31, new STONDictionaryType());
 	}
 	public static Map<Class<?>,ASN1Type> classToTypeTable = new HashMap<Class<?>,ASN1Type>();
 	static {
