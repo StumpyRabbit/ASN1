@@ -4,7 +4,7 @@
 
 	<groupId>club.callistohouse</groupId>
 	<artifactId>ASN1</artifactId>
-	<version>0.6.1-SNAPSHOT</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>ASN1</name>
@@ -19,10 +19,17 @@
 		<license>
 			<name>Callisto Enterprises Profit Non-Profit Bipolar License
  1.10 (CHPNPB 1.10)</name>
+ 			<url>https://github.com/CallistoHouseLtd/ASN1/blob/master/CHPNPB-license.txt</url>
+ 			<distribution>repo</distribution>
 			<comments>All source code is under the CHPNPB 1.10 license.</comments>
 		</license>
 	</licenses>
 
+	<scm>
+		<url>https://github.com/CallistoHouseLtd/ASN1.git</url>
+		<tag>HEAD</tag>
+	</scm>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

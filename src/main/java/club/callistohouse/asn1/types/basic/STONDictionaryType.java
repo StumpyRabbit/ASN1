@@ -5,6 +5,7 @@ import java.util.Map;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
+import club.callistohouse.ston.STON;
 import club.callistohouse.ston.STONWriter;
 
 public class STONDictionaryType extends ASN1OctetsType {
@@ -17,9 +18,10 @@ public class STONDictionaryType extends ASN1OctetsType {
 
 	@Override
 	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		String hex = STONWriter.bytesToHex((byte[])obj);
-		stonWriter.writeObjectSingleton(obj, ("''" + hex + "''"));
+		if(obj.getClass().equals(STON.mapClass())) {
+			stonWriter.writeObjectMapped(obj);
 		}
+	}
 
 	@Override
 	public void encodeValue(Object obj, ASN1OutputStream derStream) throws IOException {
