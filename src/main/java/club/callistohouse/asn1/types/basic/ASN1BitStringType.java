@@ -5,7 +5,6 @@ import java.io.IOException;
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.asn1.objects.ASN1BitString;
-import club.callistohouse.ston.STONWriter;
 
 public class ASN1BitStringType extends ASN1OctetsType {
 
@@ -94,10 +93,4 @@ public class ASN1BitStringType extends ASN1OctetsType {
 		bitString.bytes = bytes;		
 		return bitString;
 	}
-
-	@Override
-	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectSingleton(obj, ((ASN1BitString)obj).getString());
-	}
-
 }

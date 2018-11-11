@@ -3,7 +3,6 @@ package club.callistohouse.asn1.types;
 import java.io.IOException;
 
 import club.callistohouse.asn1.ASN1InputStream;
-import club.callistohouse.ston.STONWriter;
 
 public abstract class ASN1SubType extends ASN1Type {
 	public ASN1Type parent;
@@ -25,9 +24,5 @@ public abstract class ASN1SubType extends ASN1Type {
 			throws IOException, InstantiationException, IllegalAccessException {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectSingleton(obj, obj.toString());
 	}
 }

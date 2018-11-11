@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
-import club.callistohouse.ston.STONWriter;
 
 public class ASN1UTF8StringType extends ASN1OctetsType {
 
@@ -124,10 +123,5 @@ public class ASN1UTF8StringType extends ASN1OctetsType {
 		} catch (IOException e) {
 			throw new IOException(e.getMessage());
 		}
-	}
-
-	@Override
-	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeString((String) obj);
 	}
 }

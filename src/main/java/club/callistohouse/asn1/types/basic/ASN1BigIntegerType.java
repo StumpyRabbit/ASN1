@@ -6,7 +6,6 @@ import java.nio.ByteBuffer;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
-import club.callistohouse.ston.STONWriter;
 
 public class ASN1BigIntegerType extends ASN1BasicType {
 
@@ -73,10 +72,5 @@ public class ASN1BigIntegerType extends ASN1BasicType {
 		} else {
 			return new BigInteger(ByteBuffer.wrap(bytes).array());
 		}
-	}
-
-	@Override
-	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeBigInteger((BigInteger)obj);
 	}
 }

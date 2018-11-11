@@ -8,7 +8,6 @@ import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.asn1.types.ASN1EndOfIndefiniteLengthMarker;
 import club.callistohouse.asn1.types.ASN1StructureElement;
 import club.callistohouse.asn1.types.basic.ASN1EndOfIndefiniteLengthType;
-import club.callistohouse.ston.STONWriter;
 
 public abstract class ASN1MappedType<T> extends ASN1StructuredType<ASN1StructureElement> {
 
@@ -29,12 +28,6 @@ public abstract class ASN1MappedType<T> extends ASN1StructuredType<ASN1Structure
 		}
 	}
 
-	@Override
-	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		for(ASN1StructureElement element : elements) {
-			element.stonOn(obj, stonWriter);
-		}
-	}
 	public void encodeValue(Object obj, ASN1OutputStream derStream) throws IOException {
 		for(ASN1StructureElement element : elements) {
 			element.encode(obj, derStream);

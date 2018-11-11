@@ -1,11 +1,7 @@
 package club.callistohouse.asn1.types.constructed;
 
-import java.io.IOException;
-import java.util.Set;
-
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
-import club.callistohouse.ston.STONWriter;
 
 public class ASN1MappedSetType<T> extends ASN1MappedType<T> {
 

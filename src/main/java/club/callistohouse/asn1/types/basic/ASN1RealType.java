@@ -6,7 +6,6 @@ import java.nio.ByteBuffer;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
-import club.callistohouse.ston.STONWriter;
 
 public class ASN1RealType extends ASN1BasicType {
 
@@ -128,10 +127,5 @@ public class ASN1RealType extends ASN1BasicType {
 	public static double getMantissa(double x) {
 	    int exponent = Math.getExponent(x);
 	    return x / Math.pow(2, exponent);
-	}
-
-	@Override
-	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeFloat((Float)obj);
 	}
 }

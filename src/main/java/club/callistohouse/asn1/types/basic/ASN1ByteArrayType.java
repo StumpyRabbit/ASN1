@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
-import club.callistohouse.ston.STONWriter;
 import club.callistohouse.utils.ArrayUtil;
 
 public class ASN1ByteArrayType extends ASN1OctetsType {
@@ -75,11 +74,4 @@ public class ASN1ByteArrayType extends ASN1OctetsType {
 		derStream.read(bytes);
 		return bytes;
 	}
-
-	@Override
-	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		String hex = STONWriter.bytesToHex((byte[])obj);
-		stonWriter.writeObjectSingleton(obj, ("''" + hex + "''"));
-		}
-
 }

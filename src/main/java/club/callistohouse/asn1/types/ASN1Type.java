@@ -5,14 +5,12 @@ import java.io.IOException;
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1Module;
 import club.callistohouse.asn1.ASN1OutputStream;
-import club.callistohouse.ston.STONWriter;
 
 public abstract class ASN1Type extends ASN1Entity {
 
 	public ASN1Type() { this(""); }
 	public ASN1Type(String name) { super(name); }
 	public abstract int asn1Tag();
-	public abstract void stonOn(Object obj, STONWriter stonWriter) throws IOException;
 
 	public ASN1Type explicitSubType() {
 		ASN1SubType sub = new ASN1ExplicitSubType();

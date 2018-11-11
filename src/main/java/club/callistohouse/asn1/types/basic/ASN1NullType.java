@@ -5,7 +5,6 @@ import java.io.IOException;
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.asn1.objects.ASN1Null;
-import club.callistohouse.ston.STONWriter;
 
 public class ASN1NullType extends ASN1BasicType {
 
@@ -24,10 +23,4 @@ public class ASN1NullType extends ASN1BasicType {
 		// TODO Auto-generated method stub
 		return ASN1Null.NULL;
 	}
-
-	@Override
-	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeNull();
-	}
-
 }

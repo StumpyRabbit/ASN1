@@ -1,11 +1,9 @@
 package club.callistohouse.asn1.types.constructed;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import club.callistohouse.asn1.types.ASN1ChoiceElement;
-import club.callistohouse.ston.STONWriter;
 
 public abstract class ASN1StructuredType<C extends ASN1ChoiceElement> extends ASN1ConstructedType {
 	List<C> elements = new ArrayList<C>(5);

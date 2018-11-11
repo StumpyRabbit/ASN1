@@ -10,7 +10,6 @@ import java.util.Locale;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
-import club.callistohouse.ston.STONWriter;
 
 public class ASN1GeneralizedTimeType extends ASN1BasicType {
 
@@ -55,9 +54,4 @@ public class ASN1GeneralizedTimeType extends ASN1BasicType {
 		Date date = Date.from(actual.toInstant());
 		return date;
 	}
-	@Override
-	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		stonWriter.writeObjectSingleton(obj, ((Date)obj).toString());
-	}
-
 }

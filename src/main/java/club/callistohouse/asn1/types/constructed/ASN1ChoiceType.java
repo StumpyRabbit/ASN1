@@ -5,7 +5,6 @@ import java.io.IOException;
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.asn1.types.ASN1ChoiceElement;
-import club.callistohouse.ston.STONWriter;
 
 public class ASN1ChoiceType extends ASN1StructuredType<ASN1ChoiceElement> {
 
@@ -60,15 +59,4 @@ public class ASN1ChoiceType extends ASN1StructuredType<ASN1ChoiceElement> {
 	}
 	@Override
 	public ASN1ChoiceElement newElement() { return new ASN1ChoiceElement(); }
-
-	@Override
-	public void stonOn(Object obj, STONWriter stonWriter) throws IOException {
-		for(ASN1ChoiceElement element : elements) {
-			if(element.isTypeFor(obj)) {
-				element.stonOn(obj, stonWriter);
-				return;
-			}
-		}
-		throw new IOException("no choice for object");
-	}
 }
