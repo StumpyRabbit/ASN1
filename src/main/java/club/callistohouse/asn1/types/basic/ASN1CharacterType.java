@@ -18,7 +18,7 @@ import club.callistohouse.asn1.ASN1OutputStream;
 
 public class ASN1CharacterType extends ASN1OctetsType {
 
-	public ASN1CharacterType() { super("ASN1UTF8StringType"); }
+	public ASN1CharacterType() { super("ASN1CharacterType"); }
 
 	public boolean isTypeFor(Object obj) {
 		return obj instanceof String;
@@ -93,7 +93,7 @@ public class ASN1CharacterType extends ASN1OctetsType {
 		try {
 			Writer writer = new OutputStreamWriter(derStream, "UTF-8");
 			BufferedWriter fout = new BufferedWriter(writer);
-			fout.write(String.valueOf((char)obj));
+			fout.write(String.valueOf(obj));
 			fout.close();
 		} catch (IOException e) {
 			e.printStackTrace();
