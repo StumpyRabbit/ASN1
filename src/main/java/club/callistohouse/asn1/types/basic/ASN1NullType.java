@@ -1,7 +1,5 @@
 package club.callistohouse.asn1.types.basic;
 
-import java.io.IOException;
-
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
 import club.callistohouse.asn1.objects.ASN1Null;

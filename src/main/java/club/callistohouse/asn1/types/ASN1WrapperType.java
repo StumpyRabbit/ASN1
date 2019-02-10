@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import club.callistohouse.asn1.ASN1InputStream;
 import club.callistohouse.asn1.ASN1OutputStream;
-import club.callistohouse.asn1.objects.ASN1ExplicitContextValue;
 
 public abstract class ASN1WrapperType extends ASN1Type {
 

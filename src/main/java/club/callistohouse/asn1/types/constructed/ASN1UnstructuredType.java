@@ -16,13 +16,16 @@ public abstract class ASN1UnstructuredType extends ASN1ConstructedType {
 
 	public ASN1UnstructuredType() { super(""); }
 
+	@SuppressWarnings("rawtypes")
 	public void encodeValue(Object obj, ASN1OutputStream derStream) throws IOException {
 		for(Object o : (Collection)obj) {
 			elementType.encode(o, derStream);
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected abstract Collection newContainer();
+	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
 	@Override
 	public Object decodeValue(ASN1InputStream derStream, int length) throws IOException, InstantiationException, IllegalAccessException {
 		if(length == -1) {
@@ -37,6 +40,7 @@ public abstract class ASN1UnstructuredType extends ASN1ConstructedType {
 		if(derStream.getPosition() < stopPosition) { throw new IOException("invalid length"); }
 		return target;
 	}
+	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
 	private Object decodeValueIndefiniteLength(ASN1InputStream derStream) throws InstantiationException, IllegalAccessException, IOException {
 		List target = (List) newContainer();
 

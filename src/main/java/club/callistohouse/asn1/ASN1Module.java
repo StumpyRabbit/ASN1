@@ -200,6 +200,7 @@ public class ASN1Module {
 	public ASN1Type typeFrom(ASN1Type typeSpec) {
 		return typeSpec;
 	}
+	@SuppressWarnings("deprecation")
 	public <T extends ASN1Type> ASN1Type typeFrom(Class<T> typeSpecClass) {
 		try {
 			return typeSpecClass.newInstance();

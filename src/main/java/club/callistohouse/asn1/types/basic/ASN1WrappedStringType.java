@@ -24,6 +24,7 @@ public abstract class ASN1WrappedStringType<S extends ASN1AbstractString<S>> ext
 		derStream.write(((ASN1AbstractString)obj).string.getBytes());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Object decodeValue(ASN1InputStream derStream, int length) throws IOException, InstantiationException, IllegalAccessException {
 		byte[] bytes = new byte[length];
@@ -56,7 +57,7 @@ public abstract class ASN1WrappedStringType<S extends ASN1AbstractString<S>> ext
 		return obj;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public Object decodeConstructedValue(ASN1InputStream derStream, int length) throws InstantiationException, IllegalAccessException, IOException {
 		if(length == -1) {
 			return decodeValueIndefiniteLength(derStream);
@@ -69,6 +70,7 @@ public abstract class ASN1WrappedStringType<S extends ASN1AbstractString<S>> ext
 		return octets;
 	}
 
+	@SuppressWarnings("deprecation")
 	private Object decodeValueIndefiniteLength(ASN1InputStream derStream) throws InstantiationException, IllegalAccessException, IOException {
 		S octets = octetsClass().newInstance();
 		byte[] bytes = new byte[0];

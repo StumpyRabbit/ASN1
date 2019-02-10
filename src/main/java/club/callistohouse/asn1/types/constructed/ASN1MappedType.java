@@ -33,6 +33,7 @@ public abstract class ASN1MappedType<T> extends ASN1StructuredType<ASN1Structure
 			element.encode(obj, derStream);
 		}
 	}
+	@SuppressWarnings("deprecation")
 	@Override
 	public Object decodeValue(ASN1InputStream derStream, int length) throws IOException, InstantiationException, IllegalAccessException {
 		if(length == -1) {
@@ -59,6 +60,7 @@ public abstract class ASN1MappedType<T> extends ASN1StructuredType<ASN1Structure
 		if(derStream.getPosition() < stopPosition) { throw new IOException("invalid length"); }
 		return target;
 	}
+	@SuppressWarnings("deprecation")
 	private Object decodeValueIndefiniteLength(ASN1InputStream derStream) throws InstantiationException, IllegalAccessException, IOException {
 		T target = (T) mappingClass.newInstance();
 
